@@ -8,10 +8,6 @@ import PDFDocument from "pdfkit";
 import { predictDoctorSpeciality } from "../services/geminiService.js";
 import {v2 as cloudinary} from "cloudinary"
 import blogModel from "../models/blogModel.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const changeAvailability = async (req, res) => {
     try {
@@ -232,7 +228,7 @@ const createPrescription = async (req, res) => {
         const doc = new PDFDocument({ margin: 50 });
         doc.pipe(stream);
 
-        doc.image(path.join(__dirname, 'assets', 'logo.png'), { width: 150, align: "center" });
+        doc.image("./logo.png", { width: 150, align: "center" });
         doc.moveDown(0.5);
 
         doc.font("Helvetica-Bold")
