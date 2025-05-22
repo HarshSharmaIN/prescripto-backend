@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000
 connectDB();
 connectCloudinary();
 
+app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
 
