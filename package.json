@@ -12,6 +12,7 @@
     "server": "nodemon server.js"
   },
   "dependencies": {
+    "@google-cloud/secret-manager": "^6.0.1",
     "@google-cloud/storage": "^7.16.0",
     "@google/generative-ai": "^0.24.1",
     "@stream-io/node-sdk": "^0.4.22",
