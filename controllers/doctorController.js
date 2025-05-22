@@ -320,7 +320,7 @@ const createPrescription = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: "Failed to create Prescription" });
+        res.json({ success: false, message: error });
     }
 }
 
