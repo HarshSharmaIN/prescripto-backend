@@ -8,7 +8,6 @@ import PDFDocument from "pdfkit";
 import { predictDoctorSpeciality } from "../services/geminiService.js";
 import {v2 as cloudinary} from "cloudinary"
 import blogModel from "../models/blogModel.js";
-import path from "path";
 
 const changeAvailability = async (req, res) => {
     try {
@@ -218,6 +217,7 @@ const slotDateFormat = (slotDate) => {
 const createPrescription = async (req, res) => {
     try {
         const { appointmentId, medicines } = req.body;
+        
         const appointment = await appointmentModel.findById(appointmentId);
         const birthYear = new Date(appointment.userData.dob).getFullYear();
         const age = new Date().getFullYear() - birthYear;
@@ -228,9 +228,8 @@ const createPrescription = async (req, res) => {
 
         const doc = new PDFDocument({ margin: 50 });
         doc.pipe(stream);
-        
-        const imgPath = path.join(process.cwd(), 'public', 'logo.png');
-        doc.image(imgPath, { width: 150, align: "center" });
+
+        doc.image("./logo.png", { width: 150, align: "center" });
         doc.moveDown(0.5);
 
         doc.font("Helvetica-Bold")
@@ -364,13 +363,9 @@ const addBlog = async (req, res) => {
         const { docId, content, title, summary } = req.body;
         const imageFile = req.file;        
 
-        await cloudinary.uploader.upload(imageFile.path, { public_id: docId, resource_type: 'image' })
-        const optimizeUrl = cloudinary.url(docId, {
-            fetch_format: 'auto',
-            quality: 'auto'
-        });
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: 'image'})
+        const imageUrl = imageUpload.secure_url
         
-        const imageUrl = optimizeUrl
         const doctor = await doctorModel.findById(docId);
         const date = new Date().toLocaleDateString();
 

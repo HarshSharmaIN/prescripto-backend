@@ -192,7 +192,7 @@ const phoneLogin = async (req, res) => {
 
             if (existingUser) {
                 const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET)
-                res.json({success: true, message: "OTP verified", existing: true, token});
+                res.json({success: true, message: "OTP verified", existing: true, token: token});
             } else {
                 res.json({success: true, message: "OTP verified", existing: false});
             }
@@ -262,13 +262,8 @@ const updateProfile = async (req, res) => {
         await userModel.findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), dob, gender })
 
         if (imageFile) {
-            await cloudinary.uploader.upload(imageFile.path, { public_id: userId, resource_type: 'image' })
-            const optimizeUrl = cloudinary.url(userId, {
-                fetch_format: 'auto',
-                quality: 'auto'
-            });
-
-            const imageUrl = optimizeUrl
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: 'image'})
+            const imageUrl = imageUpload.secure_url
 
             await userModel.findByIdAndUpdate(userId, { image: imageUrl })
         }

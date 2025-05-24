@@ -27,13 +27,8 @@ const addDoctor = async (req,res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        await cloudinary.uploader.upload(imageFile.path, { public_id: adminId, resource_type: 'image' })
-        const optimizeUrl = cloudinary.url(adminId, {
-            fetch_format: 'auto',
-            quality: 'auto'
-        });
-
-        const imageUrl = optimizeUrl
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: 'image'})
+        const imageUrl = imageUpload.secure_url
 
         const doctorData = {
             name,
