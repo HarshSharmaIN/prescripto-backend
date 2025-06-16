@@ -56,8 +56,8 @@ const doctorSchema = new mongoose.Schema(
             default: {},
         },
         reviews: {
-            type: Object,
-            default: {}
+            type: Array,
+            default: []
         }
     },
     { minimize: false }
