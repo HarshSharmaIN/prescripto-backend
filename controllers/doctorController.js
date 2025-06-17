@@ -305,7 +305,7 @@ const createPrescription = async (req, res) => {
             doc.text(med.dose, dosageX, rowY, { width: 80 });
             doc.text(med.duration, durationX, rowY, { width: 80 });
             doc.text(med.remarks || "-", remarkX, rowY, { width: 100 });
-            rowY += 20;
+            rowY += 40;
         });
         doc.moveDown(2);
         doc.x = doc.page.margins.left;
