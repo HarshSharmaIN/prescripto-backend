@@ -229,7 +229,7 @@ const createPrescription = async (req, res) => {
         const doc = new PDFDocument({ margin: 50 });
         doc.pipe(stream);
         
-        doc.image("https://prescripto-backend-sigma.vercel.app/logo.png", { width: 150, align: "center" });
+        doc.image("./logo.png", { width: 150, align: "center" });
         doc.moveDown(0.5);
 
         doc.font("Helvetica-Bold")
