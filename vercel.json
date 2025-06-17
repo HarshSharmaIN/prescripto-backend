@@ -12,7 +12,7 @@
   "routes": [
     {
       "src": "/(logo\\.png|favicon\\.ico|.*\\.css|.*\\.js|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.svg|.*\\.webp)",
-      "continue": true
+      "dest": "public/"
     },
     {
       "src": "/(.*)",
