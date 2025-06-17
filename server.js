@@ -21,10 +21,6 @@ app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
-app.get('/', (req,res) => {
-    res.json("Backend Successfully Working");
-});
-
 app.listen(PORT, ()=> {
     console.log("Server Started on PORT:",PORT);    
 });
