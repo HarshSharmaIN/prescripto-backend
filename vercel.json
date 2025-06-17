@@ -11,7 +11,7 @@
   ],
   "routes": [
     {
-      "src": "/(logo\\.png|favicon\\.ico|.*\\.css|.*\\.js|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.svg|.*\\.webp)",
+      "src": "/logo.png",
       "dest": "public/"
     },
     {
