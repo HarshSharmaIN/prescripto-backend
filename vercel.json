@@ -4,13 +4,15 @@
     {
       "src": "server.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
+      "config": {
+        "includeFiles": ["dist/**"]
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(logo\\.png|.*\\.css|.*\\.js|.*\\.ico|.*\\.jpg|.*\\.jpeg|.*\\.webp|.*\\.svg)",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" }
+      "src": "/(logo\\.png|favicon\\.ico|.*\\.css|.*\\.js|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.svg|.*\\.webp)",
+      "continue": true
     },
     {
       "src": "/(.*)",
