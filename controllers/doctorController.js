@@ -8,6 +8,17 @@ import PDFDocument from "pdfkit";
 import { predictDoctorSpeciality } from "../services/geminiService.js";
 import {v2 as cloudinary} from "cloudinary"
 import blogModel from "../models/blogModel.js";
+import { get } from 'https';
+
+function fetchImageBuffer(url) {
+    return new Promise((resolve, reject) => {
+        get(url, (res) => {
+            const data = [];
+            res.on('data', (chunk) => data.push(chunk));
+            res.on('end', () => resolve(Buffer.concat(data)));
+        }).on('error', reject);
+    });
+}
 
 const changeAvailability = async (req, res) => {
     try {
@@ -228,8 +239,9 @@ const createPrescription = async (req, res) => {
 
         const doc = new PDFDocument({ margin: 50 });
         doc.pipe(stream);
-        
-        doc.image("public/logo.png", { width: 150, align: "center" });
+
+        const logoBuffer = await fetchImageBuffer("https://prescripto-backend-sigma.vercel.app/logo.png");
+        doc.image(logoBuffer, { width: 150, align: "center" });
         doc.moveDown(0.5);
 
         doc.font("Helvetica-Bold")
