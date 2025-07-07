@@ -644,7 +644,7 @@ const createPrescription = async (req, res) => {
 
     currentY = doc.y;
     doc.text(
-      `Name: Dr. ${safeGet(appointment, "docData.name", "N/A")}`,
+      `Name: ${safeGet(appointment, "docData.name", "N/A")}`,
       80,
       currentY
     );
@@ -668,7 +668,7 @@ const createPrescription = async (req, res) => {
       .fontSize(11)
       .fillColor("#1F2937")
       .text(
-        `Dr. ${safeGet(appointment, "docData.name", "Doctor")}`,
+        `${safeGet(appointment, "docData.name", "Doctor")}`,
         doc.page.width - 200,
         doc.y,
         {
