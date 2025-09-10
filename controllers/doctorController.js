@@ -449,7 +449,7 @@ const createPrescription = async (req, res) => {
       leftColX,
       currentY
     );
-    doc.text(`Age: ${age} years`, leftColX, currentY + 15);
+    doc.text(`Age: ${age == NaN ? "N/A" : age} years`, leftColX, currentY + 15);
     doc.text(
       `Gender: ${safeGet(appointment, "userData.gender", "N/A")}`,
       leftColX,
@@ -644,7 +644,7 @@ const createPrescription = async (req, res) => {
 
     currentY = doc.y;
     doc.text(
-      `Name: Dr. ${safeGet(appointment, "docData.name", "N/A")}`,
+      `Name: ${safeGet(appointment, "docData.name", "N/A")}`,
       80,
       currentY
     );
@@ -668,7 +668,7 @@ const createPrescription = async (req, res) => {
       .fontSize(11)
       .fillColor("#1F2937")
       .text(
-        `Dr. ${safeGet(appointment, "docData.name", "Doctor")}`,
+        `${safeGet(appointment, "docData.name", "Doctor")}`,
         doc.page.width - 200,
         doc.y,
         {
